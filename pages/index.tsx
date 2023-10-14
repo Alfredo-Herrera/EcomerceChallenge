@@ -1,8 +1,9 @@
 import MainLayout from '@/layouts/MainLayout/MainLayout';
-import GalaxyCardDemo from '@/molecules/Card';
+import CardCategory from '@/molecules/CardCategory';
 import Grid from '@mui/material/Grid';
 import { ReactElement, useEffect } from 'react';
 import ApiChupaPrecios from '../lib/apiChupaPrecios';
+import { categories } from '../lib/categories';
 
 const Home = ({ token }) => {
     useEffect(() => {
@@ -39,26 +40,24 @@ const Home = ({ token }) => {
                 alignItems: 'center',
             }}
         >
-            <Grid
-                item
-                md={4}
-                sx={{
-                    display: 'grid',
-                    placeItems: 'center',
-                }}
-            >
-                <GalaxyCardDemo />
-            </Grid>
-            <Grid
-                item
-                md={4}
-                sx={{
-                    display: 'grid',
-                    placeItems: 'center',
-                }}
-            >
-                hola
-            </Grid>
+            {categories.map((catego) => (
+                <Grid
+                    item
+                    md={2}
+                    lg={2}
+                    sm={4}
+                    xs={6}
+                    sx={{
+                        display: 'grid',
+                        placeItems: 'center',
+                        marginBottom: '20px',
+                        gap: '20px',
+                    }}
+                    key={catego.title}
+                >
+                    <CardCategory {...catego} />
+                </Grid>
+            ))}
         </Grid>
     );
 };

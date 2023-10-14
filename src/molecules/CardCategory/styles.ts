@@ -5,14 +5,19 @@ export const CardContainer = styled(Card)(`
   box-shadow: none;
   position: relative;
   max-width: 200px; 
-  max-height: 360px;
+  max-height: 250px;
   &::after {
     content: "";
     display: block;
     position: absolute;   
     bottom: 0;
     z-index: 1;
-s  }
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `);
 
 export const CardInfo = styled(Box)`
