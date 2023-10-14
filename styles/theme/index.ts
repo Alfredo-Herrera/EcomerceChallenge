@@ -143,6 +143,27 @@ theme.typography.body1 = {
     // },
 };
 
+theme.typography.body2 = {
+    fontFamily: 'Inter',
+    fontStyle: 'normal',
+    fontWeight: '400',
+    fontSize: '16px',
+    lineHeight: '22px',
+    letterSpacing: '-0.01em',
+    // [theme.breakpoints.up('sm')]: {
+    //     fontSize: '48px',
+    //     lineHeight: '60px',
+    // },
+    // [theme.breakpoints.up('md')]: {
+    //     fontSize: '56px',
+    //     lineHeight: '72px',
+    // },
+    // [theme.breakpoints.up('lg')]: {
+    //     fontSize: '64px',
+    //     lineHeight: '80px',
+    // },
+};
+
 theme.typography.button = {
     fontFamily: 'Inter',
     fontStyle: 'normal',
