@@ -18,8 +18,9 @@ export const ProductCard: FC<ProductCardType> = ({
     thumbnail,
     title,
     details,
+    asin,
 }) => {
-    const href = `/category/`;
+    const href = `/productDetail/${asin}`;
     return (
         <Link href={href}>
             <CardProductContainer>
