@@ -1,3 +1,4 @@
+import NavBar from '@/organisms/Navbar';
 import Grid from '@mui/material/Grid';
 import Toolbar from '@mui/material/Toolbar';
 import Head from 'next/head';
@@ -24,9 +25,9 @@ const MainLayout: FC<mainInterface> = ({ children, title }) => {
             <main>
                 <Grid container>
                     <Grid item md={12}>
-                        {/* <DashboardHeader isCollapse={false} onOpenSidebar={() => {}} /> */}
+                        <NavBar />
                     </Grid>
-                    <Toolbar />
+                    <Toolbar sx={{ marginBottom: '30px' }} />
                     {children}
                 </Grid>
             </main>
