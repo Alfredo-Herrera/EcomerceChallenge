@@ -1,8 +1,7 @@
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {
     CssBaseline,
     Divider,
@@ -98,22 +97,10 @@ export default function NavBar() {
                     color="inherit"
                 >
                     <Badge badgeContent={4} color="error">
-                        <MailIcon />
+                        <ShoppingCartIcon />
                     </Badge>
                 </IconButton>
                 <p>Messages</p>
-            </MenuItem>
-            <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                >
-                    <Badge badgeContent={17} color="error">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
             </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
@@ -181,16 +168,7 @@ export default function NavBar() {
                             color="inherit"
                         >
                             <Badge badgeContent={4} color="error">
-                                <MailIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon />
+                                <ShoppingCartIcon />
                             </Badge>
                         </IconButton>
                         <IconButton
