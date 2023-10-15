@@ -1,6 +1,6 @@
 import { TextCleaner } from '@/helper/TextCleaner';
 import { ProductCardType } from '@/types/product';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FC, memo } from 'react';
@@ -28,8 +28,8 @@ export const ProductCard: FC<ProductCardType> = ({
                     <Image
                         src={thumbnail}
                         alt={title}
-                        width={150}
-                        height={200}
+                        layout="fill"
+                        objectFit="contain"
                         style={{ marginTop: '10px' }}
                     />
                     <IconContainer>
@@ -49,6 +49,15 @@ export const ProductCard: FC<ProductCardType> = ({
                                 Envío gratis
                             </TitleTyphography>
                         </PriceContainer>
+                        <Box padding={'20px'}>
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                            >
+                                Ver Detalles
+                            </Button>
+                        </Box>
                     </Box>
                 </CardProductInfo>
             </CardProductContainer>
