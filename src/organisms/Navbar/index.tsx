@@ -18,10 +18,14 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import Image from 'next/image';
+import Link from 'next/link';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { main } from '../../../redux/reducers/shopping';
 
 export default function NavBar() {
+    const { data } = useSelector((state: main) => state.main);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
@@ -96,7 +100,7 @@ export default function NavBar() {
                     aria-label="show 4 new mails"
                     color="inherit"
                 >
-                    <Badge badgeContent={4} color="error">
+                    <Badge badgeContent={data.length} color="error">
                         <ShoppingCartIcon />
                     </Badge>
                 </IconButton>
@@ -122,9 +126,7 @@ export default function NavBar() {
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-            <Typography variant="h6" sx={{ my: 2 }}>
-                MUI
-            </Typography>
+            <Image src={'/logo.svg'} alt={'logo'} width={150} height={50} />
             <Divider />
             <List>
                 {navItems.map((item) => (
@@ -141,7 +143,7 @@ export default function NavBar() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <CssBaseline />
-            <AppBar component="nav">
+            <AppBar component="nav" color="secondary">
                 <Toolbar sx={{ width: '100%' }}>
                     <IconButton
                         color="inherit"
@@ -152,14 +154,24 @@ export default function NavBar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: { sm: 'initial', xs: 'center' },
+                            width: '100%',
+                        }}
                     >
-                        MUI
-                    </Typography>
+                        <Link href={'/'}>
+                            <Image
+                                src={'/logo.svg'}
+                                alt={'logo'}
+                                width={150}
+                                height={50}
+                            />
+                        </Link>
+                    </Box>
+
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton
@@ -167,7 +179,7 @@ export default function NavBar() {
                             aria-label="show 4 new mails"
                             color="inherit"
                         >
-                            <Badge badgeContent={4} color="error">
+                            <Badge badgeContent={data.length} color="error">
                                 <ShoppingCartIcon />
                             </Badge>
                         </IconButton>

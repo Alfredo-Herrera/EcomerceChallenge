@@ -16,46 +16,46 @@ export type ColorSchema =
 
 const light = {
     primary: {
-        lighter: '#b3d3ff',
-        light: '#85b4ff',
-        main: '#2f59ff',
-        dark: '#0017eb',
-        darker: '#10249f',
+        lighter: '#FFA9A1',
+        light: '#FF7645',
+        main: '#FF2E01',
+        dark: '#CC2400',
+        darker: '#991D00',
     },
     secondary: {
-        lighter: '#D2FCD8',
-        light: '#78F09F',
-        main: '#23CD7D',
-        dark: '#119370',
-        darker: '#06625B',
+        lighter: '#FFC5A5', // Un tono más claro
+        light: '#FF9C75', // Un tono más claro
+        main: '#FFAB92', // Mismo color primario
+        dark: '#CC2400', // 20% más oscuro
+        darker: '#991D00', // 30% más oscuro
     },
     success: {
-        lighter: '#EBFED6',
-        light: '#B3F985',
-        main: '#64ED36',
-        dark: '#2BAA1B',
-        darker: '#0A710D',
+        lighter: '#D6FFB9', // 20% más claro
+        light: '#A7FF78', // 10% más claro
+        main: '#64ED36', // Mismo color primario
+        dark: '#3BBA1B', // 20% más oscuro
+        darker: '#216D0D', // 30% más oscuro
     },
     info: {
-        lighter: '#D2FEF8',
-        light: '#78FBFD',
-        main: '#20D5F9',
-        dark: '#107FB3',
-        darker: '#064177',
+        lighter: '#D6FFED', // 20% más claro
+        light: '#78FBFD', // 10% más claro
+        main: '#20D5F9', // Mismo color primario
+        dark: '#107FB3', // 20% más oscuro
+        darker: '#064177', // 30% más oscuro
     },
     warning: {
-        lighter: '#FEF7D5',
-        light: '#FDE283',
-        main: '#F9C131',
-        dark: '#B37F18',
-        darker: '#774B09',
+        lighter: '#FFE1A6', // 20% más claro
+        light: '#FDE283', // 10% más claro
+        main: '#F9C131', // Mismo color primario
+        dark: '#B37F18', // 20% más oscuro
+        darker: '#774B09', // 30% más oscuro
     },
     error: {
-        lighter: '#FEE7D4',
-        light: '#FEA47F',
-        main: '#FC462A',
-        dark: '#B51519',
-        darker: '#78081C',
+        lighter: '#FFD1C8', // 20% más claro
+        light: '#FEA47F', // 10% más claro
+        main: '#FC462A', // Mismo color primario
+        dark: '#B51519', // 20% más oscuro
+        darker: '#78081C', // 30% más oscuro
     },
 };
 

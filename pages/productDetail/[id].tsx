@@ -9,6 +9,8 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import SellIcon from '@mui/icons-material/Sell';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
     Accordion,
     AccordionDetails,
@@ -24,6 +26,8 @@ import Grid from '@mui/material/Grid';
 import Image from 'next/image';
 import { ReactElement, useState } from 'react';
 import ApiChupaPrecios from '../../lib/apiChupaPrecios';
+import { setDataShoppingCar } from '../../redux/actions/shopping';
+import { carShopping, main } from '../../redux/reducers/shopping';
 import { NextPageWithLayout } from '../_app';
 
 type productDatailProps = {
@@ -53,13 +57,24 @@ const ProductDetail: NextPageWithLayout<productDatailProps> = ({
     dataProduct,
 }) => {
     const [expanded, setExpanded] = useState<string | false>(false);
+    const { data } = useSelector((state: main) => state.main);
+
+    const dispatch = useDispatch();
 
     const handleChange =
         (panel: string) =>
         (event: React.SyntheticEvent, isExpanded: boolean) => {
             setExpanded(isExpanded ? panel : false);
         };
-    console.log('🚀 ~ file: [id].tsx:16 ~ items:', dataProduct);
+
+    const addProductCar = () => {
+        const productCarDetail = {
+            image: dataProduct.main_image.link,
+            title: dataProduct.title,
+            price: dataProduct.price,
+        } as unknown as carShopping;
+        dispatch(setDataShoppingCar([...data, productCarDetail]));
+    };
     return (
         <Paper elevation={6} sx={{ margin: '0px 30px 30px 30px' }}>
             <Grid container>
@@ -265,6 +280,7 @@ const ProductDetail: NextPageWithLayout<productDatailProps> = ({
                                 variant="contained"
                                 startIcon={<LocalGroceryStoreIcon />}
                                 sx={{ height: 40 }}
+                                onClick={addProductCar}
                             >
                                 Agregar al Carrito
                             </Button>

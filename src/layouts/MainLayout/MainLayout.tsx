@@ -22,7 +22,7 @@ const MainLayout: FC<mainInterface> = ({ children, title }) => {
                 <meta name="keywords" content={`${title},`} />
             </Head>
 
-            <main style={{ background: '#EBEBEB' }}>
+            <main>
                 <Grid container>
                     <Grid item md={12}>
                         <NavBar />
