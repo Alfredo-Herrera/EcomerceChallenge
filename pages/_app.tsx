@@ -8,6 +8,7 @@ import Head from 'next/head';
 import type { ReactElement, ReactNode } from 'react';
 import theme from 'theme';
 import { wrapper } from '../redux/store';
+import '../src/molecules/SliderHome/styles.css';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
     // eslint-disable-next-line no-unused-vars
