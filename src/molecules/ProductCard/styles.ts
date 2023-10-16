@@ -6,7 +6,7 @@ export const CardProductContainer = styled(Card)(`
   box-shadow: none;
   position: relative;
   min-width: 200px; 
-  min-height: 320px;
+  min-height: 350px;
   display: flex;
   justify-content: center;
   &::after {
@@ -39,6 +39,8 @@ export const CardProductInfo = styled(Box)`
 
 export const ImageContainer = styled(Box)`
     position: relative;
+    height: 150px;
+    width: 100%;
 `;
 
 export const IconContainer = styled(Box)`
@@ -47,7 +49,7 @@ export const IconContainer = styled(Box)`
     align-items: center;
     width: 100%;
     position: absolute;
-    bottom: 60%;
+    height: -webkit-fill-available;
 `;
 
 export const IconDetails = styled(VisibilityIcon)`

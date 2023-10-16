@@ -1,5 +1,5 @@
 import MainLayout from '@/layouts/MainLayout/MainLayout';
-import ProductCard from '@/molecules/ProductCard';
+import CategorySection from '@/organisms/CategorySection';
 import { CatoryType } from '@/types/category';
 import Grid from '@mui/material/Grid';
 import { ReactElement } from 'react';
@@ -11,9 +11,10 @@ type CategoryProps = {
     category: string;
 };
 
-const Category: NextPageWithLayout<CategoryProps> = ({ dataCategory }) => {
-    const { total_products, items, pagination, selected_store } = dataCategory;
-    console.log('🚀 ~ file: [id].tsx:16 ~ items:', items);
+const Category: NextPageWithLayout<CategoryProps> = ({
+    dataCategory,
+    category,
+}) => {
     return (
         <Grid
             container
@@ -23,25 +24,7 @@ const Category: NextPageWithLayout<CategoryProps> = ({ dataCategory }) => {
                 alignItems: 'center',
             }}
         >
-            {items.map((product) => (
-                <Grid
-                    item
-                    md={3}
-                    lg={2}
-                    sm={4}
-                    xs={6}
-                    xl={2}
-                    sx={{
-                        display: 'grid',
-                        placeItems: 'center',
-                        marginBottom: '20px',
-                        gap: '20px',
-                    }}
-                    key={product.title}
-                >
-                    <ProductCard {...product} />
-                </Grid>
-            ))}
+            <CategorySection dataCategory={dataCategory} category={category} />
         </Grid>
     );
 };

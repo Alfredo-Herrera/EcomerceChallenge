@@ -49,6 +49,7 @@ const Home = () => {
                     display={'flex'}
                     justifyContent="center"
                     marginBottom="20px"
+                    item
                 >
                     <Typography variant="h3">Categorias</Typography>
                 </Grid>
