@@ -9,9 +9,10 @@ export interface main {
 }
 
 export interface carShopping {
-    image: '';
-    title: '';
-    price: '';
+    image: string;
+    title: string;
+    price: string;
+    amount: number;
 }
 
 const MyState: MyStateProps = {

@@ -1,9 +1,11 @@
 import MainLayout from '@/layouts/MainLayout/MainLayout';
-import CategorySection from '@/organisms/CategorySection';
+import CardShopping from '@/molecules/CardShopping';
 import { CatoryType } from '@/types/category';
+import { List } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { ReactElement } from 'react';
-import ApiChupaPrecios from '../../lib/apiChupaPrecios';
+import { useSelector } from 'react-redux';
+import { main } from '../../redux/reducers/shopping';
 import { NextPageWithLayout } from '../_app';
 
 type CategoryProps = {
@@ -12,6 +14,8 @@ type CategoryProps = {
 };
 
 const ShoppingCart: NextPageWithLayout<CategoryProps> = ({ dataCategory }) => {
+    const { data } = useSelector((state: main) => state.main);
+    console.log('🚀 ~ file: index.tsx:16 ~ data:', data);
     return (
         <Grid
             container
@@ -21,45 +25,21 @@ const ShoppingCart: NextPageWithLayout<CategoryProps> = ({ dataCategory }) => {
                 alignItems: 'center',
             }}
         >
-            <CategorySection dataCategory={dataCategory} />
+            <List
+                dense
+                sx={{
+                    width: '80%',
+
+                    bgcolor: 'background.paper',
+                }}
+            >
+                {data.map((element, index) => {
+                    const key = `${element.title}- ${index}`;
+                    return <CardShopping {...element} key={key} />;
+                })}
+            </List>
         </Grid>
     );
-};
-
-export const getServerSideProps = async (context: any) => {
-    const { query } = context;
-    try {
-        const { data: token } = await ApiChupaPrecios.post(
-            `integration/admin/token`,
-            {
-                username:
-                    process.env.USER_NAME || process.env.NEXT_PUBLIC_USER_NAME,
-                password:
-                    process.env.USER_PASS || process.env.NEXT_PUBLIC_USER_PASS,
-            }
-        );
-        const { data } = await ApiChupaPrecios.get(
-            `chupaprecios/customcatalog/?search=${query.id}&selected_store=amazon&page_num=1`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Access-Control-Allow-Origin': '*',
-                },
-                responseType: 'json',
-            }
-        );
-
-        return {
-            props: {
-                dataCategory: data[0].data,
-                category: query.id,
-            },
-        };
-    } catch (error) {
-        return {
-            notFound: true,
-        };
-    }
 };
 
 ShoppingCart.getLayout = function getLayout(page: ReactElement) {

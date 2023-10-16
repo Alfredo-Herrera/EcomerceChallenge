@@ -23,6 +23,7 @@ import Link from 'next/link';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { main } from '../../../redux/reducers/shopping';
+import { BoxCart, MenuItemCart } from './styles';
 
 export default function NavBar() {
     const { data } = useSelector((state: main) => state.main);
@@ -94,18 +95,20 @@ export default function NavBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 4 new mails"
-                    color="inherit"
-                >
-                    <Badge badgeContent={data.length} color="error">
-                        <ShoppingCartIcon />
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
-            </MenuItem>
+            <MenuItemCart>
+                <Link href={'/shoppingCart'}>
+                    <IconButton
+                        size="large"
+                        aria-label="show 4 new mails"
+                        color="inherit"
+                    >
+                        <Badge badgeContent={data.length} color="error">
+                            <ShoppingCartIcon />
+                        </Badge>
+                    </IconButton>
+                    <p>Messages</p>
+                </Link>
+            </MenuItemCart>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
                     size="large"
@@ -173,16 +176,18 @@ export default function NavBar() {
                     </Box>
 
                     <Box sx={{ flexGrow: 1 }} />
-                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="show 4 new mails"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={data.length} color="error">
-                                <ShoppingCartIcon />
-                            </Badge>
-                        </IconButton>
+                    <BoxCart sx={{ display: { xs: 'none', md: 'flex' } }}>
+                        <Link href={'/shoppingCart'}>
+                            <IconButton
+                                size="large"
+                                aria-label="show 4 new mails"
+                                color="inherit"
+                            >
+                                <Badge badgeContent={data.length} color="error">
+                                    <ShoppingCartIcon />
+                                </Badge>
+                            </IconButton>
+                        </Link>
                         <IconButton
                             size="large"
                             edge="end"
@@ -194,7 +199,7 @@ export default function NavBar() {
                         >
                             <AccountCircle />
                         </IconButton>
-                    </Box>
+                    </BoxCart>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"

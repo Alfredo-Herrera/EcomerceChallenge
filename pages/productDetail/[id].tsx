@@ -27,6 +27,7 @@ const ProductDetail: NextPageWithLayout<productDatailProps> = ({
             image: dataProduct.main_image.link,
             title: dataProduct.title,
             price: dataProduct.price,
+            amount: 1,
         } as unknown as carShopping;
         dispatch(setDataShoppingCar([...data, productCarDetail]));
     };
