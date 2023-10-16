@@ -28,9 +28,10 @@ export const ProductCard: FC<ProductCardType> = ({
                     <Image
                         src={thumbnail}
                         alt={title}
-                        layout="fill"
-                        objectFit="contain"
-                        style={{ marginTop: '10px' }}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                        style={{ width: '80%', height: '100%' }}
                     />
                     <IconContainer>
                         <IconDetails />

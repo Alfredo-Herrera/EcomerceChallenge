@@ -11,7 +11,10 @@ type CategoryProps = {
     category: string;
 };
 
-const Category: NextPageWithLayout<CategoryProps> = ({ dataCategory }) => {
+const Category: NextPageWithLayout<CategoryProps> = ({
+    dataCategory,
+    category,
+}) => {
     return (
         <Grid
             container
@@ -21,7 +24,7 @@ const Category: NextPageWithLayout<CategoryProps> = ({ dataCategory }) => {
                 alignItems: 'center',
             }}
         >
-            <CategorySection dataCategory={dataCategory} />
+            <CategorySection dataCategory={dataCategory} category={category} />
         </Grid>
     );
 };

@@ -27,8 +27,13 @@ export interface Link {
 
 export interface Refinement {
     price: Price;
-    color: string;
+    color: Color;
     base: Base;
+}
+
+export interface Color {
+    title: string;
+    filters: Filter[];
 }
 
 export interface Price {
