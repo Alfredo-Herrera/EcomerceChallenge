@@ -6,7 +6,6 @@ import {
     CssBaseline,
     Divider,
     Drawer,
-    List,
     ListItem,
     ListItemButton,
     ListItemText,
@@ -23,7 +22,7 @@ import Link from 'next/link';
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { main } from '../../../redux/reducers/shopping';
-import { BoxCart, MenuItemCart } from './styles';
+import { BoxCart, ListContainer, MenuItemCart } from './styles';
 
 export default function NavBar() {
     const { data } = useSelector((state: main) => state.main);
@@ -125,21 +124,23 @@ export default function NavBar() {
     );
 
     const drawerWidth = 240;
-    const navItems = ['Home', 'About', 'Contact'];
+    const navItems = ['Inicio', 'Nosotros', 'Contacto'];
 
     const drawer = (
         <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
             <Image src={'/logo.svg'} alt={'logo'} width={150} height={50} />
             <Divider />
-            <List>
+            <ListContainer>
                 {navItems.map((item) => (
-                    <ListItem key={item} disablePadding>
-                        <ListItemButton sx={{ textAlign: 'center' }}>
-                            <ListItemText primary={item} />
-                        </ListItemButton>
-                    </ListItem>
+                    <Link key={item} href="/soon">
+                        <ListItem disablePadding>
+                            <ListItemButton sx={{ textAlign: 'center' }}>
+                                <ListItemText primary={item} />
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
                 ))}
-            </List>
+            </ListContainer>
         </Box>
     );
 

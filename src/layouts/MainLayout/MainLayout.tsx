@@ -1,3 +1,4 @@
+import Alerts from '@/atoms/Alerts';
 import NavBar from '@/organisms/Navbar';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -14,7 +15,7 @@ export interface mainInterface {
 }
 // eslint-disable-next-line react/function-component-definition
 const MainLayout: FC<mainInterface> = ({ children, title }) => {
-    const { loading } = useSelector((state: main) => state.main);
+    const { loading, error } = useSelector((state: main) => state.main);
     return (
         <>
             <Head>
@@ -33,6 +34,7 @@ const MainLayout: FC<mainInterface> = ({ children, title }) => {
                         <NavBar />
                     </Grid>
                     <Toolbar sx={{ marginBottom: '30px' }} />
+                    <Alerts {...error} />
                     {children}
                     <Backdrop
                         sx={{

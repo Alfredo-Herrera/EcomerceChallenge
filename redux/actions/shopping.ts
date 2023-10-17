@@ -1,4 +1,3 @@
-import { AlertColor } from '@mui/material';
 import { carShopping } from '../reducers/shopping';
 import * as t from '../typesShoppingCar';
 
@@ -15,12 +14,11 @@ export const setDataPaginationFilter = (data: number) => ({
 });
 // funcion para modificar el estado de redux
 
-export const setError = (data: {
-    title: string;
-    severityError: AlertColor | undefined;
-}) => ({
+export const setError = (error: { title: string; severityError: string }) => ({
     type: t.SET_ALERT,
-    payload: data,
+    payload: {
+        ...error,
+    },
 });
 
 // funcion para modificar el estado de redux

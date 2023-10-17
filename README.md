@@ -56,7 +56,7 @@ Para ejecutar las pruebas es necesario dirifirse a la terminal y ejecutar el sig
 
 ## 🔗 Url
 
-[https://backbone-phi.vercel.app/](https://backbone-phi.vercel.app/)
+[https://ecomerce-challenge.vercel.app/](https://ecomerce-challenge.vercel.app/)
 
 ### 🧐 Como se abordó el problema ?
 
@@ -81,6 +81,7 @@ Para ejecutar las pruebas es necesario dirifirse a la terminal y ejecutar el sig
 -   [Styled-Components] En el proyecto se integró la tecnologia Styled-Components.
 -   [Next.js] En el proyecto se integró Next/GetServerSideProps Next/Link, Next/GetLayout, Next/Image Next/Head .
 -   [Redux] En el proyecto se integró Redux.
+-   [Alerts] En el proyecto se integraron Notificaciones para darle feedback al usuario cuando sucede un error del lado del servidor.
 -   [Jest] En el proyecto se integró Jest para realizar las pruebas en los componentes.
 -   [Next.js] Obtención de la información de la API de lado del servidor.
 -   [404] En el proyecto se integró la página de 404.

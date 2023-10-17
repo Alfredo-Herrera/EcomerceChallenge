@@ -8,7 +8,11 @@ import { Paper } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { ReactElement } from 'react';
 import ApiChupaPrecios from '../../lib/apiChupaPrecios';
-import { setDataShoppingCar } from '../../redux/actions/shopping';
+import {
+    setDataShoppingCar,
+    setError,
+    setLoading,
+} from '../../redux/actions/shopping';
 import { carShopping, main } from '../../redux/reducers/shopping';
 import { NextPageWithLayout } from '../_app';
 
@@ -26,13 +30,22 @@ const ProductDetail: NextPageWithLayout<productDatailProps> = ({
 
     // funcion para agregar los productos en el carrito
     const addProductCar = () => {
+        dispatch(setLoading(true));
         const productCarDetail = {
             image: dataProduct.main_image.link,
             title: dataProduct.title,
             price: dataProduct.price,
             amount: 1,
         } as unknown as carShopping;
-        dispatch(setDataShoppingCar([...data, productCarDetail]));
+        const errorMesage = {
+            title: `Se agrego correctamente el producto`,
+            severityError: 'success',
+        };
+        setTimeout(() => {
+            dispatch(setError(errorMesage));
+            dispatch(setDataShoppingCar([...data, productCarDetail]));
+            dispatch(setLoading(false));
+        }, 1000);
     };
     return (
         <Paper elevation={6} sx={{ margin: '0px 30px 30px 30px' }}>

@@ -10,7 +10,12 @@ export const CardCategory: FC<CardCategoryProps> = ({ image, title }) => {
     return (
         <Link href={href}>
             <CardContainer>
-                <Image src={image} alt={title} width={200} height={300} />
+                <Image
+                    src={`${href}.png`}
+                    alt={title}
+                    width={200}
+                    height={300}
+                />
                 <CardInfo py={3} px={2}>
                     <Box>
                         <Typography>{title}</Typography>

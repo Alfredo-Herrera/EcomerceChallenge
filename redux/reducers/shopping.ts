@@ -43,11 +43,15 @@ const Shopping = (state = MyState, action: { type: any; payload: any }) => {
                     severityError: 'success',
                 },
             };
+        case t.SET_ALERT:
+            return {
+                ...state,
+                error: action.payload,
+            };
         case t.SET_DATA_SHOPPING_CAR:
             return {
                 ...state,
                 data: action.payload,
-                error: '',
             };
         case t.SET_DATA_FILTER_PAGINATION:
             return {

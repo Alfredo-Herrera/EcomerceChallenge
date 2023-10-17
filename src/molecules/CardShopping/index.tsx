@@ -8,7 +8,11 @@ import {
 import Image from 'next/image';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setDataShoppingCar } from '../../../redux/actions/shopping';
+import {
+    setDataShoppingCar,
+    setError,
+    setLoading,
+} from '../../../redux/actions/shopping';
 import { carShopping, main } from '../../../redux/reducers/shopping';
 
 const CardShopping: FC<carShopping> = ({ image, title, price, amount }) => {
@@ -16,8 +20,19 @@ const CardShopping: FC<carShopping> = ({ image, title, price, amount }) => {
     const { data } = useSelector((state: main) => state.main);
 
     const deleteItem = () => {
-        const filteredLibraries = data.filter((item) => item.title !== title);
-        dispatch(setDataShoppingCar(filteredLibraries));
+        dispatch(setLoading(true));
+        const errorMesage = {
+            title: `Se elimino correctamente el producto`,
+            severityError: 'success',
+        };
+        setTimeout(() => {
+            const filteredLibraries = data.filter(
+                (item) => item.title !== title
+            );
+            dispatch(setDataShoppingCar(filteredLibraries));
+            dispatch(setError(errorMesage));
+            dispatch(setLoading(false));
+        }, 1000);
     };
     return (
         <ListItem

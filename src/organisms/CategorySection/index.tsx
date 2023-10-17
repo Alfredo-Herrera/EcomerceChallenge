@@ -5,13 +5,17 @@ import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
+    Button,
     Grid,
     Pagination,
     Typography,
+    useMediaQuery,
 } from '@mui/material';
 
 import FiltersCategory from '@/molecules/FiltersCategory';
-import { FC, useState } from 'react';
+import SkeletonCard from '@/molecules/SkeletonCard';
+import Image from 'next/image';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ApiChupaPrecios from '../../../lib/apiChupaPrecios';
 import {
@@ -26,20 +30,64 @@ import {
 } from './styles';
 
 export type CategorySectionProps = {
-    dataCategory: CatoryType;
     category: string;
 };
 
-const CategorySection: FC<CategorySectionProps> = ({
-    dataCategory,
-    category,
-}) => {
+const CategorySection: FC<CategorySectionProps> = ({ category }) => {
     const dispatch = useDispatch();
+    const [viewSkeleton, setViewSkeleton] = useState(true);
+    const [error, setError] = useState('');
+    const matches = useMediaQuery('(min-width:600px)');
+    const [dataCategory, setdataCategory] = useState<CatoryType>({
+        total_products: 0,
+        items: [],
+        pagination: {
+            current: '',
+            previous: '',
+            next: { href: '', title: '' },
+            links: [{ href: '', title: '' }],
+        },
+        refinements: [],
+        selected_store: '',
+    });
     const { items, pagination, refinements } = dataCategory;
-
-    const [viewItems, setviewItems] = useState(items);
     const filters = refinements[0];
     const { filterPagination } = useSelector((state: main) => state.main);
+
+    useEffect(() => {
+        getElements(1);
+    }, []);
+
+    const getElements = async (page: number) => {
+        try {
+            const { data: token } = await ApiChupaPrecios.post(
+                `integration/admin/token`,
+                {
+                    username:
+                        process.env.USER_NAME ||
+                        process.env.NEXT_PUBLIC_USER_NAME,
+                    password:
+                        process.env.USER_PASS ||
+                        process.env.NEXT_PUBLIC_USER_PASS,
+                }
+            );
+            const { data } = await ApiChupaPrecios.get(
+                `chupaprecios/customcatalog/?search=${category}&selected_store=amazon&page_num=${page}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    responseType: 'json',
+                }
+            );
+            setViewSkeleton(false);
+            setdataCategory(data[0].data);
+            setError('');
+        } catch (error) {
+            setError('Error en la Api');
+        }
+    };
 
     const searchItemsPagination = async (page: number) => {
         dispatch(setLoading(true));
@@ -50,34 +98,43 @@ const CategorySection: FC<CategorySectionProps> = ({
                 behavior: 'smooth',
             });
         }
-        const { data: token } = await ApiChupaPrecios.post(
-            `integration/admin/token`,
-            {
-                username:
-                    process.env.USER_NAME || process.env.NEXT_PUBLIC_USER_NAME,
-                password:
-                    process.env.USER_PASS || process.env.NEXT_PUBLIC_USER_PASS,
-            }
-        );
-        const { data } = await ApiChupaPrecios.get(
-            `chupaprecios/customcatalog/?search=${category}&selected_store=amazon&page_num=${page}`,
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Access-Control-Allow-Origin': '*',
-                },
-                responseType: 'json',
-            }
-        );
+        try {
+            const { data: token } = await ApiChupaPrecios.post(
+                `integration/admin/token`,
+                {
+                    username:
+                        process.env.USER_NAME ||
+                        process.env.NEXT_PUBLIC_USER_NAME,
+                    password:
+                        process.env.USER_PASS ||
+                        process.env.NEXT_PUBLIC_USER_PASS,
+                }
+            );
+            const { data } = await ApiChupaPrecios.get(
+                `chupaprecios/customcatalog/?search=${category}&selected_store=amazon&page_num=${page}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    responseType: 'json',
+                }
+            );
 
-        setviewItems(data[0].data.items ?? []);
-        dispatch(setLoading(false));
+            setdataCategory(data[0].data);
+            dispatch(setLoading(false));
+            setError('');
+        } catch (error) {
+            setError('Error en la consulta');
+        }
     };
+
+    const viewAccordion = !matches ? {} : { expanded: true };
 
     return (
         <SectionCategoryContainer>
             <LeftSideContainer>
-                <Accordion>
+                <Accordion {...viewAccordion}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
@@ -86,21 +143,21 @@ const CategorySection: FC<CategorySectionProps> = ({
                         <Typography variant="body2">Filtros</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        {filters.price && (
+                        {filters?.price && (
                             <FiltersCategory
                                 title={filters.price.title}
                                 filters={filters.price.filters}
                             />
                         )}
 
-                        {filters.color && (
+                        {filters?.color && (
                             <FiltersCategory
                                 title={filters.color.title}
                                 filters={filters.color.filters}
                             />
                         )}
 
-                        {filters.base && (
+                        {filters?.base && (
                             <FiltersCategory
                                 title={filters.base.title}
                                 filters={filters.base.filters}
@@ -110,7 +167,46 @@ const CategorySection: FC<CategorySectionProps> = ({
                 </Accordion>
             </LeftSideContainer>
             <BodyContainer container>
-                {viewItems.map((product, i) => (
+                {viewSkeleton &&
+                    !error &&
+                    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
+                        (item) => {
+                            const key = `skeleton-${item}`;
+                            return <SkeletonCard key={key} />;
+                        }
+                    )}
+                {error && (
+                    <Grid
+                        item
+                        md={12}
+                        xs={12}
+                        sx={{
+                            display: 'grid',
+                            placeItems: 'center',
+                            marginBottom: '20px',
+                        }}
+                    >
+                        <Image
+                            src={'/error.svg'}
+                            alt={'clean data'}
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            style={{ width: '50%', height: '100%' }}
+                        />
+                        <Typography variant="h2">
+                            Error en la consulta del Api{' '}
+                        </Typography>
+                        <Button
+                            size="large"
+                            onClick={() => getElements(1)}
+                            variant="outlined"
+                        >
+                            Volver a intentar
+                        </Button>
+                    </Grid>
+                )}
+                {items.map((product, i) => (
                     <Grid
                         item
                         md={3}
