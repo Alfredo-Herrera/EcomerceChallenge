@@ -51,6 +51,8 @@ const Home = () => {
             <Grid container sx={{ display: 'flex' }}>
                 <Grid
                     md={12}
+                    sm={12}
+                    xs={12}
                     display={'flex'}
                     justifyContent="center"
                     marginBottom="20px"

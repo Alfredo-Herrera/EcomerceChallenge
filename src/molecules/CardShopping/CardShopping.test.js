@@ -1,12 +1,10 @@
 /* eslint-disable no-undef */
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux'; // Si estás utilizando Redux
-import { createStore } from 'redux'; // Si estás utilizando Redux
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import rootReducer from '../../../redux/reduxTest/rootReducer';
 import CardShopping from './index';
-
-// Define una función simulada para setDataShoppingCar
 
 test('El componente CardShopping se renderiza correctamente y maneja el evento de eliminar', () => {
     render(

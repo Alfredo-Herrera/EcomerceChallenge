@@ -11,8 +11,10 @@ const Alerts: FC<{
 }> = ({ title, severityError }) => {
     const dispatch = useDispatch();
     const handleClose = () => {
+        // funcion para eliminar la notificacion
         dispatch(setError({ title: '', severityError: 'success' }));
     };
+    // si no trae title retorna un fragment
     if (!title) return <> </>;
     return (
         <Stack sx={{ width: '100%', margin: ' 0px 0px 20px 0 ' }} spacing={2}>

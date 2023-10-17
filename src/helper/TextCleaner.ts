@@ -1,3 +1,4 @@
+// funcion para formatear caracteres especiales
 export const TextCleaner = (texto: string) => {
     return texto
         .replace(/Ã¡/g, 'á')

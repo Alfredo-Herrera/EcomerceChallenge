@@ -6,6 +6,7 @@ import { Box, Typography } from '@mui/material';
 import { FC } from 'react';
 
 const ReviewsInfo: FC<Reviews> = ({ rating, total_reviews }) => {
+    // funcion que determina cuantas estrellas se van a visualizar
     const starView = () => {
         const data = rating.toFixed(1);
         const newData = data.split('.');

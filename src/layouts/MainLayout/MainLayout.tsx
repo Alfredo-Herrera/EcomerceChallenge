@@ -15,6 +15,7 @@ export interface mainInterface {
 }
 // eslint-disable-next-line react/function-component-definition
 const MainLayout: FC<mainInterface> = ({ children, title }) => {
+    // datos que vienen desde el estado de redux
     const { loading, error } = useSelector((state: main) => state.main);
     return (
         <>
