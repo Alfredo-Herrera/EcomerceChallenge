@@ -42,6 +42,21 @@ Procederemos a ejecutar el siguiente comando:
 
 ### 👟 Paso 4
 
+Genere un archico .env en donde agregue las siguientes variables de entorno.
+
+```shell
+   API_URL="https://chupaprecios.com.mx/rest/V1/"
+    NEXT_PUBLIC_API_URL="https://chupaprecios.com.mx/rest/V1/"
+
+    USER_NAME="candidatoFront"
+    NEXT_PUBLIC_USER_NAME="candidatoFront"
+
+    USER_PASS="Ch8t45t!f"
+    NEXT_PUBLIC_USER_PASS="Ch8t45t!f"
+```
+
+### 👟 Paso 5
+
 Al levantar el proyecto, podremos ver la `Prueba` en la siguiente `url`, [http://localhost:3000](http://localhost:3000).
 
 ## 📝 Pruebas
