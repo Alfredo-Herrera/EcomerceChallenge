@@ -1,8 +1,12 @@
 import NavBar from '@/organisms/Navbar';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Toolbar from '@mui/material/Toolbar';
 import Head from 'next/head';
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { main } from '../../../redux/reducers/shopping';
 
 export interface mainInterface {
     children: React.ReactElement | React.ReactNode;
@@ -10,6 +14,7 @@ export interface mainInterface {
 }
 // eslint-disable-next-line react/function-component-definition
 const MainLayout: FC<mainInterface> = ({ children, title }) => {
+    const { loading } = useSelector((state: main) => state.main);
     return (
         <>
             <Head>
@@ -29,6 +34,15 @@ const MainLayout: FC<mainInterface> = ({ children, title }) => {
                     </Grid>
                     <Toolbar sx={{ marginBottom: '30px' }} />
                     {children}
+                    <Backdrop
+                        sx={{
+                            color: '#fff',
+                            zIndex: (theme) => theme.zIndex.drawer + 1,
+                        }}
+                        open={loading}
+                    >
+                        <CircularProgress color="inherit" />
+                    </Backdrop>
                 </Grid>
             </main>
         </>

@@ -14,7 +14,10 @@ import FiltersCategory from '@/molecules/FiltersCategory';
 import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ApiChupaPrecios from '../../../lib/apiChupaPrecios';
-import { setDataPaginationFilter } from '../../../redux/actions/shopping';
+import {
+    setDataPaginationFilter,
+    setLoading,
+} from '../../../redux/actions/shopping';
 import { main } from '../../../redux/reducers/shopping';
 import {
     BodyContainer,
@@ -39,7 +42,14 @@ const CategorySection: FC<CategorySectionProps> = ({
     const { filterPagination } = useSelector((state: main) => state.main);
 
     const searchItemsPagination = async (page: number) => {
+        dispatch(setLoading(true));
         dispatch(setDataPaginationFilter(page));
+        if (window.scrollTo) {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
         const { data: token } = await ApiChupaPrecios.post(
             `integration/admin/token`,
             {
@@ -59,7 +69,9 @@ const CategorySection: FC<CategorySectionProps> = ({
                 responseType: 'json',
             }
         );
+
         setviewItems(data[0].data.items ?? []);
+        dispatch(setLoading(false));
     };
 
     return (

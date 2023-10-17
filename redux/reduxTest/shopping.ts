@@ -8,6 +8,7 @@ export interface MyStateProps {
         title: string;
         severityError: AlertColor | undefined;
     };
+    loading: boolean;
 }
 
 export interface main {
@@ -36,6 +37,7 @@ const MyState: MyStateProps = {
         title: 'Esto es un error',
         severityError: 'success',
     },
+    loading: false,
 };
 
 const Shopping = (state = MyState, action: { type: any; payload: any }) => {
@@ -58,6 +60,11 @@ const Shopping = (state = MyState, action: { type: any; payload: any }) => {
             return {
                 ...state,
                 filterPagination: action.payload,
+            };
+        case t.LOADING:
+            return {
+                ...state,
+                loading: action.payload,
             };
         default:
             return { ...state };

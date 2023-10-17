@@ -13,11 +13,19 @@ export const setDataPaginationFilter = (data: number) => ({
     type: t.SET_DATA_FILTER_PAGINATION,
     payload: data,
 });
+// funcion para modificar el estado de redux
 
 export const setError = (data: {
     title: string;
     severityError: AlertColor | undefined;
 }) => ({
     type: t.SET_ALERT,
+    payload: data,
+});
+
+// funcion para modificar el estado de redux
+
+export const setLoading = (data: boolean) => ({
+    type: t.LOADING,
     payload: data,
 });
