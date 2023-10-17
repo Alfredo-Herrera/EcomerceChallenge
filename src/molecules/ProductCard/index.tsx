@@ -31,7 +31,7 @@ export const ProductCard: FC<ProductCardType> = ({
                         width={0}
                         height={0}
                         sizes="100vw"
-                        style={{ width: '80%', height: '100%' }}
+                        style={{ width: '50%', height: '100%' }}
                     />
                     <IconContainer>
                         <IconDetails />

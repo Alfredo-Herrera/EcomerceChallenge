@@ -33,6 +33,7 @@ const CategorySection: FC<CategorySectionProps> = ({
 }) => {
     const dispatch = useDispatch();
     const { items, pagination, refinements } = dataCategory;
+
     const [viewItems, setviewItems] = useState(items);
     const filters = refinements[0];
     const { filterPagination } = useSelector((state: main) => state.main);
@@ -64,7 +65,7 @@ const CategorySection: FC<CategorySectionProps> = ({
     return (
         <SectionCategoryContainer>
             <LeftSideContainer>
-                <Accordion expanded>
+                <Accordion>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
@@ -119,6 +120,7 @@ const CategorySection: FC<CategorySectionProps> = ({
                 <Grid
                     item
                     md={12}
+                    xs={12}
                     sx={{
                         display: 'grid',
                         placeItems: 'center',

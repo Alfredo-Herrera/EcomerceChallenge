@@ -24,7 +24,7 @@ const ProductDescription: FC<ProductDescriptionProps> = ({ description }) => {
                     <Typography>Descripción del Producto</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography variant="body1">{description}</Typography>
+                    <Typography variant="body2">{description}</Typography>
                 </AccordionDetails>
             </Accordion>
         </Box>

@@ -4,7 +4,7 @@ const PaymentMethods = () => {
     return (
         <Image
             src={'/example.webp'}
-            alt={'data'}
+            alt={'dataPayments'}
             layout="fill"
             objectFit="contain"
         />

@@ -13,7 +13,7 @@ const ReviewsInfo: FC<Reviews> = ({ rating, total_reviews }) => {
         let retunData: string | any[] = [];
         for (let i = 0; i < numberStarIcon; i++) {
             const key = `star-${i}`;
-            retunData.push(<StarIcon key={key} />);
+            retunData.push(<StarIcon key={key} id={key} />);
         }
 
         if (newData.length > 1) {
@@ -21,13 +21,11 @@ const ReviewsInfo: FC<Reviews> = ({ rating, total_reviews }) => {
             retunData = [...retunData, icon];
         }
         if (retunData.length === 5) {
-            console.log('pase aqu');
             return retunData;
         } else {
             const numberStar = 5 - retunData.length;
             for (let i = 0; i < numberStar; i++) {
                 const key = `star-new-${i}`;
-                console.log('🚀 ~ file: index.tsx:32 ~ starView ~ key:', key);
                 retunData.push(<StarBorderIcon key={key} />);
             }
             return retunData;

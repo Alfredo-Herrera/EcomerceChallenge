@@ -1,46 +1,73 @@
 import MainLayout from '@/layouts/MainLayout/MainLayout';
 import CardShopping from '@/molecules/CardShopping';
-import { CatoryType } from '@/types/category';
-import { List } from '@mui/material';
+import { List, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import Image from 'next/image';
 import { ReactElement } from 'react';
 import { useSelector } from 'react-redux';
 import { main } from '../../redux/reducers/shopping';
 import { NextPageWithLayout } from '../_app';
 
-type CategoryProps = {
-    dataCategory: CatoryType;
-    category: string;
-};
-
-const ShoppingCart: NextPageWithLayout<CategoryProps> = ({ dataCategory }) => {
+const ShoppingCart: NextPageWithLayout = () => {
+    // obtengo los datos del estado en redux
     const { data } = useSelector((state: main) => state.main);
-    console.log('🚀 ~ file: index.tsx:16 ~ data:', data);
     return (
         <Grid
             container
             sx={{
                 display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                gap: '20px',
             }}
         >
-            <List
-                dense
+            <Grid
+                item
+                md={12}
                 sx={{
-                    width: '80%',
-
-                    bgcolor: 'background.paper',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                 }}
             >
-                {data.map((element, index) => {
-                    const key = `${element.title}- ${index}`;
-                    return <CardShopping {...element} key={key} />;
-                })}
-            </List>
+                <Typography variant="h3">Carrito de Compras</Typography>
+            </Grid>
+            <Grid
+                item
+                md={12}
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                {data.length > 0 ? (
+                    <List
+                        dense
+                        sx={{
+                            width: '80%',
+
+                            bgcolor: 'background.paper',
+                        }}
+                    >
+                        {data.map((element, index) => {
+                            const key = `${element.title}- ${index}`;
+                            return <CardShopping {...element} key={key} />;
+                        })}
+                    </List>
+                ) : (
+                    <Image
+                        src={'/NoOrder.svg'}
+                        alt={'clean data'}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                        style={{ width: '50%', height: '100%' }}
+                    />
+                )}
+            </Grid>
         </Grid>
     );
 };
+// funcion para agregar layout a nuestra pagina
 
 ShoppingCart.getLayout = function getLayout(page: ReactElement) {
     return <MainLayout title="Categoria">{page}</MainLayout>;

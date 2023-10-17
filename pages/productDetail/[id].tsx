@@ -19,9 +19,12 @@ type productDatailProps = {
 const ProductDetail: NextPageWithLayout<productDatailProps> = ({
     dataProduct,
 }) => {
+    // obtengo los datos del estado en redux
     const { data } = useSelector((state: main) => state.main);
 
     const dispatch = useDispatch();
+
+    // funcion para agregar los productos en el carrito
     const addProductCar = () => {
         const productCarDetail = {
             image: dataProduct.main_image.link,
@@ -55,9 +58,11 @@ const ProductDetail: NextPageWithLayout<productDatailProps> = ({
     );
 };
 
+// esta funcion ayuda a obtener los datos de la API de lado del servidor para que se pueda usa el SSR
 export const getServerSideProps = async (context: any) => {
     const { query } = context;
     try {
+        // funcion para obter el token
         const { data: token } = await ApiChupaPrecios.post(
             `integration/admin/token`,
             {
@@ -67,6 +72,7 @@ export const getServerSideProps = async (context: any) => {
                     process.env.USER_PASS || process.env.NEXT_PUBLIC_USER_PASS,
             }
         );
+        // funcion para obter los datos de la api
         const { data } = await ApiChupaPrecios.get(
             `chupaprecios/productdetail/?asin=${query.id}&selectedStore=amazon`,
             {
@@ -77,10 +83,6 @@ export const getServerSideProps = async (context: any) => {
                 responseType: 'json',
             }
         );
-        console.log(
-            '🚀 ~ file: [id].tsx:51 ~ getServerSideProps ~ data:',
-            data
-        );
 
         return {
             props: {
@@ -88,11 +90,13 @@ export const getServerSideProps = async (context: any) => {
             },
         };
     } catch (error) {
+        // si hay un error en las consultas con el return notFound mandas a una pagina 404
         return {
             notFound: true,
         };
     }
 };
+// funcion para agregar layout a nuestra pagina
 
 ProductDetail.getLayout = function getLayout(page: ReactElement) {
     return <MainLayout title="Categoria">{page}</MainLayout>;

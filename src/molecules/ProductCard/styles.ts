@@ -41,6 +41,8 @@ export const ImageContainer = styled(Box)`
     position: relative;
     height: 150px;
     width: 100%;
+    display: flex;
+    justify-content: center;
 `;
 
 export const IconContainer = styled(Box)`
