@@ -29,9 +29,11 @@ const Category: NextPageWithLayout<CategoryProps> = ({
     );
 };
 
+// esta funcion ayuda a obtener los datos de la API de lado del servidor para que se pueda usa el SSR
 export const getServerSideProps = async (context: any) => {
     const { query } = context;
     try {
+        // funcion para obter el token
         const { data: token } = await ApiChupaPrecios.post(
             `integration/admin/token`,
             {
@@ -41,6 +43,7 @@ export const getServerSideProps = async (context: any) => {
                     process.env.USER_PASS || process.env.NEXT_PUBLIC_USER_PASS,
             }
         );
+        // funcion para obter los datos de la api
         const { data } = await ApiChupaPrecios.get(
             `chupaprecios/customcatalog/?search=${query.id}&selected_store=amazon&page_num=1`,
             {
@@ -59,12 +62,15 @@ export const getServerSideProps = async (context: any) => {
             },
         };
     } catch (error) {
+        // si hay un error en las consultas con el return notFound mandas a una pagina 404
+
         return {
             notFound: true,
         };
     }
 };
 
+// funcion para agregar layout a nuestra pagina
 Category.getLayout = function getLayout(page: ReactElement) {
     return <MainLayout title="Categoria">{page}</MainLayout>;
 };

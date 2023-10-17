@@ -32,7 +32,12 @@ const Home = () => {
                     className="mySwiper"
                 >
                     <SwiperSlide>
-                        <Box sx={{ width: '100%', height: '400px' }}>
+                        <Box
+                            sx={{
+                                width: { xs: '360px', md: '100%' },
+                                height: { xs: '200px', md: '400px' },
+                            }}
+                        >
                             <Image
                                 src={'/homeImage.gif'}
                                 alt={'homeSlider'}
@@ -76,6 +81,7 @@ const Home = () => {
     );
 };
 
+// funcion para agregar layout a nuestra pagina
 Home.getLayout = function getLayout(page: ReactElement) {
     return <MainLayout title="Dashboard">{page}</MainLayout>;
 };

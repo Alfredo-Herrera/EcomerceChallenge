@@ -5,6 +5,7 @@ import { Box, Grid } from '@mui/material';
 import Image from 'next/image';
 import { FC } from 'react';
 import { Reviews } from '../../types/product';
+import { GridContainer } from './styles';
 
 type ContainerProductDetailProps = {
     title: string;
@@ -25,9 +26,9 @@ const ContainerProductDetail: FC<ContainerProductDetailProps> = ({
 }) => {
     return (
         <Grid container>
-            <Grid item md={6} padding={'30px'}>
-                <Image src={image} alt={title} width={378} height={468} />
-            </Grid>
+            <GridContainer item md={6} padding={'30px'}>
+                <Image src={image} alt={title} width={200} height={300} />
+            </GridContainer>
             <Grid
                 item
                 md={6}

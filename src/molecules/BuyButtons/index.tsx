@@ -1,7 +1,8 @@
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import SellIcon from '@mui/icons-material/Sell';
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { FC } from 'react';
+import { ButtonsContainer } from './styles';
 
 type BuyButtonsProps = {
     addProductCar: () => void;
@@ -9,20 +10,13 @@ type BuyButtonsProps = {
 
 const BuyButtons: FC<BuyButtonsProps> = ({ addProductCar }) => {
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                gap: '10px',
-                alignItems: 'center',
-                flexDirection: 'column',
-                marginTop: '20px',
-            }}
-        >
+        <ButtonsContainer>
             <Button
                 fullWidth
                 variant="contained"
                 startIcon={<SellIcon />}
                 sx={{ height: 40 }}
+                href="/soon"
             >
                 Comprar ahora
             </Button>
@@ -35,7 +29,7 @@ const BuyButtons: FC<BuyButtonsProps> = ({ addProductCar }) => {
             >
                 Agregar al Carrito
             </Button>
-        </Box>
+        </ButtonsContainer>
     );
 };
 

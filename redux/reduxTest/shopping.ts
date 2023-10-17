@@ -23,10 +23,17 @@ export interface carShopping {
 
 // estado inicial
 const MyState: MyStateProps = {
-    data: [],
+    data: [
+        {
+            image: '/logo.png',
+            title: 'titulo del carrito',
+            price: '450',
+            amount: 2,
+        },
+    ],
     filterPagination: 1,
     error: {
-        title: '',
+        title: 'Esto es un error',
         severityError: 'success',
     },
 };
